@@ -1,0 +1,63 @@
+<div class="pomodoro-container" [class]="themeClass$ | async">
+  <audio #audioPlayer src="korok-yahaha.mp3" preload="auto"></audio>
+    <div class="session-display">
+      <button
+      (click)="timerService.setSession(SessionType.Work)"
+      [class.active]="(timerState$ | async)?.sessionType === SessionType.Work"
+      >
+      Work         
+      </button>
+      <button
+      (click)="timerService.setSession(SessionType.ShortBreak)"
+      [class.active]="(timerState$ | async)?.sessionType === SessionType.ShortBreak"
+      >
+      Short Break
+      </button>
+      <button
+      (click)="timerService.setSession(SessionType.LongBreak)"
+      [class.active]="(timerState$ | async)?.sessionType === SessionType.LongBreak"
+      >
+      Long Break
+      </button>
+    </div>
+
+    <h1 class="time-display">
+        {{ formatTime((timerState$ | async)?.timeRemaining || 0) }}
+    </h1>
+
+    <p class="status-text">
+      Current Session:
+      <strong>{{ (timerState$ | async)?.sessionType }}</strong>
+    </p>
+
+    <p class="work-count-display">
+      Completed Work Sessions:
+      <strong>{{ (timerState$ | async)?.completedWorkSessions || 0 }}</strong>
+      <span>/ 4</span>
+    </p>
+
+    <div class="controls">
+      <button
+      *ngIf="!(timerState$ | async)?.isRunning"
+      (click)="onStart()"
+      class="start-button"
+      >
+      START
+      </button>
+
+      <button
+      *ngIf="(timerState$ | async)?.isRunning"
+      (click)="onPause()"
+      class="pause-button"
+      >
+      PAUSE
+      </button>
+
+      <button
+      (click)="onReset()"
+      class="reset-button"
+      >
+      RESET
+      </button>
+    </div>
+  </div>

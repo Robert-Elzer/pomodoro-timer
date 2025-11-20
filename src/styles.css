@@ -1,0 +1,15 @@
+:root {
+    --color-primary: #e74c3c;
+    --color-secondary: #2ecc71;
+    --color-background: #f8f8f8;
+    --color-text: #333;
+    --color-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    transition: background-color 0.5s;
+}
